@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please enter a valid number!", Toast.LENGTH_LONG).show()
             } else {
                 val str: String = calculationView.text.toString()
-                val result = evaluate(str)
+                val result = evaluateInput(str)
                 val finalResult = result.toString()
                 resultView.setText(finalResult)
             }
@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please enter a valid number!", Toast.LENGTH_LONG).show()
             } else {
                 try {
-                    val result = evaluate(sqstr)
+                    val result = evaluateInput(sqstr)
                     val sqrtResult = Math.sqrt(result)
                     val finalResult = sqrtResult.toString()
                     resultView.setText(finalResult)
@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity() {
             } else if (input.contains("/0")) {
                 Toast.makeText(this, "Division by zero is not allowed!", Toast.LENGTH_LONG).show()
             } else {
-                val result = evaluate(input)
+                val result = evaluateInput(input)
                 val formattedResult = decimalFormat.format(result)
                 resultView.text = formattedResult
             }
@@ -174,7 +174,7 @@ class MainActivity : AppCompatActivity() {
                     if (match.startsWith("sqrt(")) {
                         val innerExpression = match.substring(5, match.length - 1)
                         try {
-                            val innerResult = Math.sqrt(evaluate(innerExpression)).toString()
+                            val innerResult = Math.sqrt(evaluateInput(innerExpression)).toString()
                             matcher.appendReplacement(result, innerResult)
                         } catch (e: Exception) {
                             Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
@@ -190,7 +190,7 @@ class MainActivity : AppCompatActivity() {
 
                 // Now, evaluate the processed expression
                 try {
-                    val finalResult = evaluate(processedExpression).toString()
+                    val finalResult = evaluateInput(processedExpression).toString()
                     resultView.setText(finalResult)
                 } catch (e: Exception) {
                     Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
@@ -209,7 +209,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun evaluate(expression: String): Double {
+    fun evaluateInput(expression: String): Double {
         val expression = "0${expression}"
         val operands = Stack<Double>()
         val operators = Stack<Char>()
@@ -297,3 +297,7 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
+/*
+Referred online resources such as YouTube,GeekForGeeks and ChatGPT for understanding.
+ */
